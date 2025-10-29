@@ -174,3 +174,12 @@ poetry.toml
 pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python
+app/domain/user/__pycache__/repository.cpython-314.pyc
+app/domain/user/__pycache__/model.cpython-314.pyc
+app/__pycache__/application.cpython-314.pyc
+app/domain/customer/__pycache__/model.cpython-314.pyc
+app/domain/customer/__pycache__/schemas.cpython-314.pyc
+app/domain/user/__pycache__/model.cpython-314.pyc
+app/domain/user/__pycache__/repository.cpython-314.pyc
+app/domain/user/__pycache__/routes.cpython-314.pyc
+app/domain/user/__pycache__/schemas.cpython-314.pyc
