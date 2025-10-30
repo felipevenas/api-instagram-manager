@@ -1,7 +1,7 @@
 from fastapi import HTTPException, status
 
 from app.domain.customer.repository import CustomerRepository
-from app.domain.customer.schemas import ResponseCustomer, CreateCustomer, UpdateCustomer
+from app.domain.customer.schemas import ReadCustomer, CreateCustomer, UpdateCustomer
 
 class CustomerService:
     def __init__(self, repository: CustomerRepository):

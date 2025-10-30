@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
 from app.domain.customer.model import Customer
-from app.domain.customer.schemas import CreateCustomer, UpdateCustomer, ResponseCustomer, ResponseCustomerSimple
+from app.domain.customer.schemas import CreateCustomer, UpdateCustomer, ReadCustomer, SimpleCustomer
 
 class CustomerRepository:
     def __init__(self, db: Session):
@@ -13,16 +13,16 @@ class CustomerRepository:
         self.db.commit()
         return customer
     
-    def get_all(self) -> list[ResponseCustomerSimple]:
+    def get_all(self) -> list[SimpleCustomer]:
         return self.db.query(Customer).all()
     
-    def get_by_id(self, customer_id: int) -> ResponseCustomerSimple | None:
+    def get_by_id(self, customer_id: int) -> SimpleCustomer | None:
         db_customer = self.db.query(Customer).filter(Customer.id == customer_id).first()
         if db_customer:
             return db_customer
         return None
     
-    def update(self, user_id: int, data: UpdateCustomer) -> ResponseCustomerSimple | None:
+    def update(self, user_id: int, data: UpdateCustomer) -> SimpleCustomer | None:
         db_customer = self.get_by_id(user_id)
         if db_customer:
             for key, value in data.model_dump().items():

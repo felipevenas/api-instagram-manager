@@ -1,49 +1,29 @@
 from pydantic import BaseModel, ConfigDict
-from typing import TYPE_CHECKING
+from typing import Optional
 
-if TYPE_CHECKING:
-    from app.domain.customer.schemas import ResponseCustomer
+from app.domain.customer.schemas import SimpleCustomer
 
-class ResponseUser(BaseModel):
-    id: int
+class BaseUser(BaseModel):
     name: str
     email: str 
     login: str
-    password: str
-    customers: list["ResponseCustomer"]
+    customers: list[SimpleCustomer]
     status: bool
-    
-    model_config = ConfigDict(
-        from_attributes=True,
-        arbitrary_types_allowed=True
-    )
 
-class ResponseUserSimple(BaseModel):
+class ReadUser(BaseUser):
+    id: int
+
+    model_config = ConfigDict(from_attributes=True)
+
+class CreateUser(BaseUser):
+    password: str
+
+class UpdateUser(BaseModel):
+    name: Optional[str] = None
+    email: Optional[str] = None
+    status: Optional[bool] = None
+
+class SimpleUser(BaseModel):
     id: int
     name: str
-    email: str 
-    login: str
     status: bool
-
-    model_config = ConfigDict(
-        from_attributes=True,
-        arbitrary_types_allowed=True
-    )
-
-class CreateUser(BaseModel):
-    name: str
-    email: str
-    login: str
-    password: str
-
-    model_config = ConfigDict(
-        from_attributes=True,
-    )
-
-class UpdateUser(CreateUser):
-    name: str
-    email: str
-
-    model_config = ConfigDict(
-        from_attributes=True,
-    )
