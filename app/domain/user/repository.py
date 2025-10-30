@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
 from app.domain.user.model import User
-from app.domain.user.schemas import ResponseUserSimple, CreateUser, UpdateUser
+from app.domain.user.schemas import SimpleUser, CreateUser, UpdateUser
 
 class UserRepository:
     def __init__(self, db: Session):
@@ -13,7 +13,7 @@ class UserRepository:
         self.db.commit()
         return db_user
 
-    def get_all(self) -> list[ResponseUserSimple]:
+    def get_all(self) -> list[SimpleUser]:
         return self.db.query(User).all()
 
     def get_by_id(self, user_id: int):

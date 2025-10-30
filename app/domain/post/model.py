@@ -12,5 +12,5 @@ class Post(Base):
     date = Column(Date, default=datetime.date.today)
     schedule = Column(Boolean, default=False)
 
-    customer_id = Column(ForeignKey("customers.id"), nullable=False)
+    customer_id = Column(Integer, ForeignKey("customers.id"))
     customer = relationship("Customer", back_populates="posts")

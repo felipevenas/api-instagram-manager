@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 from app.db.database import get_db
 from app.domain.user.repository import UserRepository
 from app.domain.user.service import UserService
-from app.domain.user.schemas import ResponseUser, ResponseUserSimple, CreateUser, UpdateUser
+from app.domain.user.schemas import ReadUser, SimpleUser, CreateUser, UpdateUser
 
 user_router = APIRouter()
 
@@ -12,15 +12,15 @@ def get_user_service(db: Session = Depends(get_db)):
     repository = UserRepository(db)
     return UserService(repository)
 
-@user_router.post("/register", response_model=ResponseUser, summary=["Criar um novo usuário"])
+@user_router.post("/register", response_model=ReadUser, summary=["Criar um novo usuário"])
 def create(data: CreateUser, service: UserService = Depends(get_user_service)):
     return service.create(data)
 
-@user_router.get("", response_model=list[ResponseUserSimple], summary=["Listar todos os usuários"])
+@user_router.get("", response_model=list[SimpleUser], summary=["Listar todos os usuários"])
 def get_all(service: UserService = Depends(get_user_service)):
     return service.get_all()
 
-@user_router.get("/{user_id}", response_model=ResponseUserSimple, summary=["Buscar um usuário pelo ID"])
+@user_router.get("/{user_id}", response_model=SimpleUser, summary=["Buscar um usuário pelo ID"])
 def get_by_id(user_id: int, service: UserService = Depends(get_user_service)):
     return service.get_by_id(user_id)
 
